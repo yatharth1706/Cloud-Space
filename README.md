@@ -1,3 +1,14 @@
+# Cloud Space
+
+[![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/yatharth1706)
+[![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/yatharth1706) [![Made With Love](https://img.shields.io/badge/Made%20With-Love-orange.svg)](https://github.com/yatharth1706)
+
+Cloud Space is efficient, scalable solution to store files and get sharable link. Supports following:
+
+- Uploading files, images all types of files
+- Getting sharable link for uploaded files
+- User Authentication
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
