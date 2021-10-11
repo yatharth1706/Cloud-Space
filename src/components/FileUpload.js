@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { useDropzone } from "react-dropzone";
+import { UploadIcon } from "@heroicons/react/outline";
 
 const baseStyle = {
   flex: 1,
@@ -9,10 +10,10 @@ const baseStyle = {
   padding: "20px",
   borderWidth: 2,
   borderRadius: 2,
-  borderColor: "#eeeeee",
+  borderColor: "#C6C6C6",
   borderStyle: "dashed",
-  backgroundColor: "#fafafa",
-  color: "#bdbdbd",
+  backgroundColor: "#ffffff",
+  color: "#3F3F3F",
   outline: "none",
   transition: "border .24s ease-in-out",
 };
@@ -46,6 +47,7 @@ function FileUpload() {
     <div className="container">
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
+        <UploadIcon className="h-8 w-8 mb-2" />
         <p>Drag 'n' drop file here, or click to select file</p>
       </div>
     </div>
