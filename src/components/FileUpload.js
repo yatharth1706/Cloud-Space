@@ -2,6 +2,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { UploadIcon, DocumentIcon, TrashIcon } from "@heroicons/react/outline";
 import { Progress } from "theme-ui";
+import axios from "axios";
 
 const baseStyle = {
   flex: 1,
@@ -57,6 +58,21 @@ function FileUpload() {
   useEffect(() => {
     setSelectedFiles([...acceptedFiles]);
   }, [acceptedFiles]);
+
+  // useEffect(() => {
+  //   if (selectedFiles.length > 0) {
+  //     uploadSelectedFileToS3(selectedFiles[0]);
+  //   }
+  // }, [selectedFiles]);
+
+  // const uploadSelectedFileToS3 = async (file) => {
+  //   let url = await axios.get("", {
+  //     params: {
+  //       File: file.name,
+  //     },
+  //   });
+  //   console.log(url);
+  // };
 
   return (
     <div className="container flex flex-col">
