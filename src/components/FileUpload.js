@@ -56,23 +56,47 @@ function FileUpload() {
   );
 
   useEffect(() => {
+    setPercent(30);
+    setSelectedFiles([]);
+  }, []);
+
+  useEffect(() => {
     setSelectedFiles([...acceptedFiles]);
   }, [acceptedFiles]);
 
-  // useEffect(() => {
-  //   if (selectedFiles.length > 0) {
-  //     uploadSelectedFileToS3(selectedFiles[0]);
-  //   }
-  // }, [selectedFiles]);
+  useEffect(() => {
+    if (selectedFiles.length > 0) {
+      uploadSelectedFileToS3(selectedFiles[0]);
+    }
+  }, [selectedFiles]);
 
-  // const uploadSelectedFileToS3 = async (file) => {
-  //   let url = await axios.get("", {
-  //     params: {
-  //       File: file.name,
-  //     },
-  //   });
-  //   console.log(url);
-  // };
+  const uploadSelectedFileToS3 = async (file) => {
+    try {
+      // First get the presigned url for upload
+      let response = await axios.get(
+        "https://rvtwjaolf1.execute-api.ap-south-1.amazonaws.com/Prod/file",
+        {
+          params: {
+            Action: "GetUploadURL",
+            File: file.name,
+          },
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
+      console.log(response.data);
+      setPercent(60);
+
+      // Using presinged url upload the file
+      await axios.put(response.data.URL, file);
+      setPercent(100);
+    } catch (err) {
+      alert("There is some error while uploading file. Try again later");
+      setPercent(100);
+    }
+  };
 
   return (
     <div className="container flex flex-col">
