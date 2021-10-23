@@ -3,6 +3,8 @@ import { useDropzone } from "react-dropzone";
 import { UploadIcon, DocumentIcon, TrashIcon } from "@heroicons/react/outline";
 import { Progress } from "theme-ui";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const baseStyle = {
   flex: 1,
@@ -36,6 +38,7 @@ const rejectStyle = {
 function FileUpload() {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [percent, setPercent] = useState(30);
+  const [userId, setUserId] = useState("");
   const {
     getRootProps,
     acceptedFiles,
@@ -43,7 +46,9 @@ function FileUpload() {
     isDragActive,
     isDragAccept,
     isDragReject,
-  } = useDropzone();
+  } = useDropzone({
+    accept: "image/*",
+  });
 
   const style = useMemo(
     () => ({
@@ -58,7 +63,16 @@ function FileUpload() {
   useEffect(() => {
     setPercent(30);
     setSelectedFiles([]);
+    for (var key in localStorage) {
+      if (key.includes("userData")) {
+        setUserId(JSON.parse(localStorage.getItem(key)).Username);
+      }
+    }
   }, []);
+
+  useEffect(() => {
+    console.log(userId);
+  }, [userId]);
 
   useEffect(() => {
     setSelectedFiles([...acceptedFiles]);
@@ -91,7 +105,31 @@ function FileUpload() {
 
       // Using presinged url upload the file
       await axios.put(response.data.URL, file);
+      setPercent(80);
+
+      // Get File URL
+      let url = await axios.get(
+        "https://rvtwjaolf1.execute-api.ap-south-1.amazonaws.com/Prod/file?Action=GetFileURL",
+        {
+          params: {
+            File: file.name,
+          },
+        }
+      );
+
+      // Lastly create a record in dyanamo for uploaded urls of user
+      await axios.post(
+        "https://rvtwjaolf1.execute-api.ap-south-1.amazonaws.com/Prod/file?Action=SaveURL",
+        {
+          Id: userId,
+          URL: url.data.URL,
+        }
+      );
       setPercent(100);
+      toast.success("File uploaded successfully");
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (err) {
       alert("There is some error while uploading file. Try again later");
       setPercent(100);
@@ -114,13 +152,15 @@ function FileUpload() {
                 <span className=" text-left">{selFile.name}</span>
                 <div className="flex w-full">
                   <Progress max={100} value={percent} style={{ marginTop: "10px" }} />
-                  <TrashIcon className="w-6 h-6 ml-3 text-gray-700" />
                 </div>
               </div>
             </div>
           ))}
         </div>
       )}
+      <>
+        <ToastContainer />
+      </>
     </div>
   );
 }
