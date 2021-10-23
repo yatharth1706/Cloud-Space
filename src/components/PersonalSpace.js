@@ -2,11 +2,13 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import PersonalSpaceImg from "../images/PersonalSpace.svg";
 import URLModal from "./URLModal";
+import ReactLoading from "react-loading";
 
 function PersonalSpace() {
   const [userUploads, setUserUploads] = useState([]);
   const [show, setShow] = useState(false);
   const [selectedURL, setSelectedURL] = useState("");
+  const [isFetchingRecords, setIsFetchingRecords] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = (url = "") => {
@@ -21,6 +23,7 @@ function PersonalSpace() {
 
   const getUploads = async () => {
     try {
+      setIsFetchingRecords(true);
       let userId = "";
       for (var key in localStorage) {
         if (key.includes("userData")) {
@@ -44,6 +47,8 @@ function PersonalSpace() {
       }
     } catch (err) {
       alert("There is some issue while fetching user uploads");
+    } finally {
+      setIsFetchingRecords(false);
     }
   };
 
@@ -52,8 +57,17 @@ function PersonalSpace() {
   }, [userUploads]);
 
   return (
-    <div className="bg-white border flex flex-col justify-center w-full px-20 py-6 mt-6">
-      {userUploads && userUploads.length > 0 ? (
+    <div className="bg-white border flex flex-col justify-center w-full px-4 sm:px-6 md:px-20 py-6 mt-6">
+      {isFetchingRecords && (
+        <ReactLoading
+          className="text-center mx-auto"
+          type={"spinningBubbles"}
+          color={"blue"}
+          height={"10%"}
+          width={"10%"}
+        />
+      )}
+      {!isFetchingRecords && userUploads && userUploads.length > 0 ? (
         <div className="flex flex-col">
           <span className="text-lg text-left">My Personal Space</span>
           <div class="my-4 space-y-2 lg:space-y-0 md:space-y-0 md:gap-2 lg:gap-2 md:grid md:grid-cols-2 lg:grid-cols-3">
@@ -67,10 +81,12 @@ function PersonalSpace() {
           </div>
         </div>
       ) : (
-        <>
-          <img src={PersonalSpaceImg} className="h-80 w-80 mx-auto" />
-          <span className="text-lg">My Personal Space</span>
-        </>
+        !isFetchingRecords && (
+          <>
+            <img src={PersonalSpaceImg} className="h-80 w-80 mx-auto" />
+            <span className="text-lg">My Personal Space</span>
+          </>
+        )
       )}
       <URLModal url={selectedURL} show={show} handleShow={handleShow} handleClose={handleClose} />
     </div>
