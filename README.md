@@ -9,6 +9,16 @@ Cloud Space is efficient, scalable solution to store files and get sharable link
 - Getting sharable link for uploaded files
 - User Authentication
 
+# Tech Stack Used:
+- AWS Amplify (Login and Signup)
+- Dynamodb (Storage)
+- S3 (File Uploads)
+- Lambda functions
+
+# Pending things
+- [x] UI (Share url integration)
+- [x] Improve User design and experience
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
