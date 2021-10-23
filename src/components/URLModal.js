@@ -6,6 +6,7 @@ function URLModal(props) {
 
   const handleChangeText = () => {
     setCopyText("Copied");
+    navigator.clipboard.writeText(props.url);
     setTimeout(() => {
       setCopyText("Copy Link");
     }, 1000);
