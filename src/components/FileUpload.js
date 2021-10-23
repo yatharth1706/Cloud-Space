@@ -21,6 +21,7 @@ const baseStyle = {
   outline: "none",
   transition: "border .24s ease-in-out",
   cursor: "pointer",
+  width: "100%",
 };
 
 const activeStyle = {
@@ -137,7 +138,7 @@ function FileUpload() {
   };
 
   return (
-    <div className="container flex flex-col">
+    <div className=" flex flex-col">
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
         <UploadIcon className="h-8 w-8 mb-2" />

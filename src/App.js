@@ -5,6 +5,7 @@ import Main from "./components/Main";
 import Amplify from "aws-amplify";
 import awsconfig from "./aws-exports";
 import { AmplifySignOut, withAuthenticator, AmplifySignIn } from "@aws-amplify/ui-react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 Amplify.configure(awsconfig);
 

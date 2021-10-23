@@ -1,12 +1,22 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import PersonalSpaceImg from "../images/PersonalSpace.svg";
+import URLModal from "./URLModal";
 
 function PersonalSpace() {
   const [userUploads, setUserUploads] = useState([]);
+  const [show, setShow] = useState(false);
+  const [selectedURL, setSelectedURL] = useState("");
+
+  const handleClose = () => setShow(false);
+  const handleShow = (url = "") => {
+    setShow(true);
+    setSelectedURL(url);
+  };
 
   useEffect(() => {
     getUploads();
+    setSelectedURL("");
   }, []);
 
   const getUploads = async () => {
@@ -46,11 +56,12 @@ function PersonalSpace() {
       {userUploads && userUploads.length > 0 ? (
         <div className="flex flex-col">
           <span className="text-lg text-left">My Personal Space</span>
-          <div className="w-full h-auto mt-0 flex flex-wrap">
+          <div class="my-4 space-y-2 lg:space-y-0 md:space-y-0 md:gap-2 lg:gap-2 md:grid md:grid-cols-2 lg:grid-cols-3">
             {userUploads.map((item) => (
               <img
                 src={item}
-                className="rounded shadow mr-4 mt-6 w-60 h-60 object-cover object-center"
+                className="shadow w-full h-60 rounded hover:shadow-2xl object-cover object-center"
+                onClick={() => handleShow(item)}
               />
             ))}
           </div>
@@ -61,6 +72,7 @@ function PersonalSpace() {
           <span className="text-lg">My Personal Space</span>
         </>
       )}
+      <URLModal url={selectedURL} show={show} handleShow={handleShow} handleClose={handleClose} />
     </div>
   );
 }
