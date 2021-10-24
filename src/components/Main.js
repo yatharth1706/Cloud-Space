@@ -4,7 +4,7 @@ import PersonalSpace from "./PersonalSpace";
 
 function Main() {
   return (
-    <div className="mt-4 px-4 md:px-20 py-6">
+    <div className="mt-2 px-10 md:px-20 py-6">
       <FileUpload />
       <PersonalSpace />
     </div>

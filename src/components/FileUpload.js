@@ -5,6 +5,7 @@ import { Progress } from "theme-ui";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Auth } from "aws-amplify";
 
 const baseStyle = {
   flex: 1,
@@ -87,6 +88,8 @@ function FileUpload() {
 
   const uploadSelectedFileToS3 = async (file) => {
     try {
+      const session = await Auth.currentSession();
+      const token = session.getIdToken().getJwtToken();
       // First get the presigned url for upload
       let response = await axios.get(
         "https://rvtwjaolf1.execute-api.ap-south-1.amazonaws.com/Prod/file",
@@ -98,6 +101,7 @@ function FileUpload() {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
+            Authorization: token,
           },
         }
       );
@@ -115,6 +119,9 @@ function FileUpload() {
           params: {
             File: file.name,
           },
+          headers: {
+            Authorization: token,
+          },
         }
       );
 
@@ -124,6 +131,11 @@ function FileUpload() {
         {
           Id: userId,
           URL: url.data.URL,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
         }
       );
       setPercent(100);

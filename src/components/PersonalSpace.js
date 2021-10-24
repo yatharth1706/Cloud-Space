@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import PersonalSpaceImg from "../images/PersonalSpace.svg";
 import URLModal from "./URLModal";
 import ReactLoading from "react-loading";
+import { Auth } from "aws-amplify";
 
 function PersonalSpace() {
   const [userUploads, setUserUploads] = useState([]);
@@ -31,11 +32,18 @@ function PersonalSpace() {
           break;
         }
       }
+
+      const session = await Auth.currentSession();
+      const token = session.getIdToken().getJwtToken();
+
       let userData = await axios.get(
         "https://rvtwjaolf1.execute-api.ap-south-1.amazonaws.com/Prod/file?Action=GetUserFiles",
         {
           params: {
             Id: userId,
+          },
+          headers: {
+            Authorization: token,
           },
         }
       );
