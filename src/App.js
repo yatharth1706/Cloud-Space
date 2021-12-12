@@ -11,7 +11,7 @@ Amplify.configure(awsconfig);
 
 function App() {
   return (
-    <div className="App">
+    <div className="App w-full h-full">
       <Navbar />
       <Main />
     </div>
