@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import PersonalSpaceImg from "../images/PersonalSpace.svg";
+import SpaceRepresentation from "../images/SpaceRepresentation.svg";
 import URLModal from "./URLModal";
 import ReactLoading from "react-loading";
 import { Auth } from "aws-amplify";
@@ -65,24 +65,26 @@ function PersonalSpace() {
   }, [userUploads]);
 
   return (
-    <div className="bg-white border flex flex-col justify-center w-full px-4 sm:px-6 md:px-20 py-6 mt-6">
+    <div className="bg-white flex flex-col justify-center w-full h-full px-4 sm:px-6 md:px-20 py-0 mt-6">
       {isFetchingRecords && (
         <ReactLoading
           className="text-center mx-auto"
           type={"spinningBubbles"}
-          color={"blue"}
+          color={"#FF9900"}
           height={"10%"}
           width={"10%"}
         />
       )}
       {!isFetchingRecords && userUploads && userUploads.length > 0 ? (
         <div className="flex flex-col">
-          <span className="text-lg text-left">My Personal Space</span>
-          <div class="my-4 space-y-2 lg:space-y-0 md:space-y-0 md:gap-2 lg:gap-2 md:grid md:grid-cols-2 lg:grid-cols-3">
+          <div
+            class="md:grid md:gap-8 lg:gap-8 md:grid-cols-2 lg:grid-cols-3"
+            style={{ gridGap: "16px" }}
+          >
             {userUploads.map((item) => (
               <img
                 src={item}
-                className="shadow w-full h-60 rounded hover:shadow-2xl object-cover object-center"
+                className="shadow w-full w-full h-60 rounded hover:shadow-2xl object-cover object-center"
                 onClick={() => handleShow(item)}
               />
             ))}
@@ -90,10 +92,9 @@ function PersonalSpace() {
         </div>
       ) : (
         !isFetchingRecords && (
-          <>
-            <img src={PersonalSpaceImg} className="h-80 w-80 mx-auto" />
-            <span className="text-lg">My Personal Space</span>
-          </>
+          <div className="space-image-container p-30 w-full h-full flex justify-center items-center">
+            <img src={SpaceRepresentation} alt="Space" className="w-full h-full" />
+          </div>
         )
       )}
       <URLModal url={selectedURL} show={show} handleShow={handleShow} handleClose={handleClose} />

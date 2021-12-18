@@ -1,5 +1,22 @@
+import SpaceRepresentation from "../images/SpaceRepresentation.svg";
+import { useRecoilValue } from "recoil";
+import sidebarItemAtom from "../atoms/sidebarAtom";
+import PersonalSpace from "./PersonalSpace";
+import FileUpload from "./FileUpload";
+import Builder from "./Builder";
+
 function ActiveComponent() {
-  return <div className="w-full bg-white shadow-sm ml-10 rounded" style={{ height: "80vh" }}></div>;
+  const activeSidebarItem = useRecoilValue(sidebarItemAtom);
+
+  console.log(activeSidebarItem);
+
+  return (
+    <div className="w-full bg-white shadow-sm ml-10 rounded" style={{ height: "80vh" }}>
+      {activeSidebarItem === "mySpaces" && <PersonalSpace />}
+      {activeSidebarItem === "upload" && <FileUpload />}
+      {activeSidebarItem === "builder" && <Builder />}
+    </div>
+  );
 }
 
 export default ActiveComponent;

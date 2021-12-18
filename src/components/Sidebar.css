@@ -1,0 +1,4 @@
+.sidebarDiv {
+  display: flex;
+  flex-direction: column;
+}

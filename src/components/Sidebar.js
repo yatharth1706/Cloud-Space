@@ -1,27 +1,53 @@
 import { CloudIcon } from "@heroicons/react/solid";
 import { CloudUploadIcon, PencilAltIcon } from "@heroicons/react/outline";
+import { useRecoilState } from "recoil";
+import sidebarItemAtom from "../atoms/sidebarAtom";
+import "./Sidebar.css";
 
 function Sidebar() {
+  const [sidebarActiveItem, setSidebarActiveItem] = useRecoilState(sidebarItemAtom);
+
   return (
-    <div className="flex flex-col">
-      <div
-        style={{ background: "#FF9900" }}
-        className="rounded h-14 w-14 flex justify-center items-center"
-      >
-        <CloudIcon className="h-8 w-8 text-white" />
+    <div className="sidebarDiv">
+      <div className="w-14 h-auto flex flex-col mb-3">
+        <div
+          className="rounded p-2"
+          style={{ backgroundColor: sidebarActiveItem === "mySpaces" ? "#ff9900" : "white" }}
+          onClick={() => setSidebarActiveItem("mySpaces")}
+        >
+          <CloudIcon
+            className="h-6 w-6"
+            style={{ color: sidebarActiveItem === "mySpaces" ? "white" : "black" }}
+          />
+        </div>
+        <span className="mt-1">My Spaces</span>
       </div>
-      <span>
-        My <br />
-        Spaces
-      </span>
-      <div className="bg-white rounded h-14 w-14 flex justify-center items-center mt-4">
-        <CloudUploadIcon className="h-8 w-8 text-gray-900" />
+      <div className="w-14 h-auto flex flex-col mb-3">
+        <div
+          className="rounded p-2"
+          style={{ backgroundColor: sidebarActiveItem === "upload" ? "#ff9900" : "white" }}
+          onClick={() => setSidebarActiveItem("upload")}
+        >
+          <CloudUploadIcon
+            className="h-6 w-6"
+            style={{ color: sidebarActiveItem === "upload" ? "white" : "black" }}
+          />
+        </div>
+        <span className="mt-1">Upload</span>
       </div>
-      <span>Upload</span>
-      <div className="bg-white rounded h-14 w-14 flex justify-center items-center mt-4">
-        <PencilAltIcon className="h-8 w-8 text-gray-900 stroke-1" />
+      <div className="w-14 h-auto flex flex-col">
+        <div
+          className="rounded p-2"
+          style={{ backgroundColor: sidebarActiveItem === "builder" ? "#ff9900" : "white" }}
+          onClick={() => setSidebarActiveItem("builder")}
+        >
+          <PencilAltIcon
+            className="h-6 w-6"
+            style={{ color: sidebarActiveItem === "builder" ? "white" : "black" }}
+          />
+        </div>
+        <span className="mt-2">Builder</span>
       </div>
-      <span>Builder</span>
     </div>
   );
 }

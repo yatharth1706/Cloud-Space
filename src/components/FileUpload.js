@@ -6,13 +6,16 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Auth } from "aws-amplify";
+import FileUploadImg from "../images/FileUploadImg.svg";
+import sidebarItemAtom from "../atoms/sidebarAtom";
+import { useRecoilState } from "recoil";
 
 const baseStyle = {
   flex: 1,
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  padding: "20px",
+  padding: "10px",
   borderWidth: 2,
   borderRadius: 2,
   borderColor: "#C6C6C6",
@@ -22,7 +25,8 @@ const baseStyle = {
   outline: "none",
   transition: "border .24s ease-in-out",
   cursor: "pointer",
-  width: "100%",
+  width: "90%",
+  margin: "0px auto",
 };
 
 const activeStyle = {
@@ -41,6 +45,8 @@ function FileUpload() {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [percent, setPercent] = useState(30);
   const [userId, setUserId] = useState("");
+  const [sidebarActiveItem, setSidebarActiveItem] = useRecoilState(sidebarItemAtom);
+
   const {
     getRootProps,
     acceptedFiles,
@@ -141,7 +147,7 @@ function FileUpload() {
       setPercent(100);
       toast.success("File uploaded successfully");
       setTimeout(() => {
-        window.location.reload();
+        setSidebarActiveItem("mySpaces");
       }, 2000);
     } catch (err) {
       alert("There is some error while uploading file. Try again later");
@@ -151,20 +157,34 @@ function FileUpload() {
 
   return (
     <div className=" flex flex-col">
+      <img src={FileUploadImg} className="h-80 w-80 mx-auto" alt={"fileUploadImg"} />
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
         <UploadIcon className="h-8 w-8 mb-2" />
         <p>Drag 'n' drop file here, or click to select file</p>
       </div>
       {selectedFiles.length > 0 && (
-        <div className="flex w-full h-auto p-4 bg-white mt-4">
+        <div className="flex w-full h-auto bg-white mt-3">
           {selectedFiles.map((selFile) => (
-            <div className="flex space-x-2 w-full">
+            <div
+              className="flex space-x-2 rounded  p-3"
+              style={{
+                width: "90%",
+                margin: "0px auto",
+                borderWidth: 1,
+                borderRadius: 2,
+                borderColor: "#ececec",
+              }}
+            >
               <DocumentIcon className="w-10 h-10 text-gray-500" />
               <div className="flex flex-col w-full">
                 <span className=" text-left">{selFile.name}</span>
                 <div className="flex w-full">
-                  <Progress max={100} value={percent} style={{ marginTop: "10px" }} />
+                  <Progress
+                    max={100}
+                    value={percent}
+                    style={{ marginTop: "10px", color: "#FF9900" }}
+                  />
                 </div>
               </div>
             </div>

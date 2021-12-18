@@ -20,7 +20,7 @@ function URLModal(props) {
         <div className="flex space-between">
           <Form.Control type="text" value={props.url} disabled />
           <span
-            style={{ color: "blue", whiteSpace: "nowrap", marginTop: "6px", marginLeft: "6px" }}
+            style={{ color: "#FF9900", whiteSpace: "nowrap", marginTop: "6px", marginLeft: "6px" }}
             className="cursor-pointer"
             onClick={handleChangeText}
           >
@@ -30,7 +30,7 @@ function URLModal(props) {
       </Modal.Body>
       <Modal.Footer style={{ display: "flex", justifyContent: "center" }}>
         <Button
-          style={{ background: "#1F6EF7", color: "white", border: "none", width: "100px" }}
+          style={{ background: "#FF9900", color: "white", border: "none", width: "100px" }}
           variant="secondary"
           onClick={props.handleClose}
         >
