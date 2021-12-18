@@ -65,7 +65,7 @@ function PersonalSpace() {
   }, [userUploads]);
 
   return (
-    <div className="bg-white flex flex-col justify-center w-full h-full px-4 sm:px-6 md:px-20 py-0 mt-6">
+    <div className="bg-white py-2  w-full h-full px-4 sm:px-6 md:px-20 py-0 mt-6">
       {isFetchingRecords && (
         <ReactLoading
           className="text-center mx-auto"
@@ -78,7 +78,7 @@ function PersonalSpace() {
       {!isFetchingRecords && userUploads && userUploads.length > 0 ? (
         <div className="flex flex-col">
           <div
-            class="md:grid md:gap-8 lg:gap-8 md:grid-cols-2 lg:grid-cols-3"
+            class="space-y-4 md:space-y-0 md:grid md:gap-8 lg:gap-8 md:grid-cols-2 lg:grid-cols-3"
             style={{ gridGap: "16px" }}
           >
             {userUploads.map((item) => (

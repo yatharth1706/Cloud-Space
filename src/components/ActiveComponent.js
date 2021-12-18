@@ -11,7 +11,7 @@ function ActiveComponent() {
   console.log(activeSidebarItem);
 
   return (
-    <div className="w-full bg-white shadow-sm ml-10 rounded" style={{ height: "80vh" }}>
+    <div className="w-full bg-white shadow-sm md:ml-10 rounded" style={{ height: "80vh" }}>
       {activeSidebarItem === "mySpaces" && <PersonalSpace />}
       {activeSidebarItem === "upload" && <FileUpload />}
       {activeSidebarItem === "builder" && <Builder />}

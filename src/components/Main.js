@@ -6,7 +6,7 @@ import Sidebar from "./Sidebar";
 
 function Main() {
   return (
-    <div className="w-full h-full mt-2 px-10 md:px-20 py-6 flex">
+    <div className="w-full h-full mt-2 px-10 md:px-20 py-6 flex flex-col md:flex-row">
       <Sidebar />
       <ActiveComponent />
       {/* <FileUpload />

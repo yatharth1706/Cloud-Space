@@ -8,15 +8,15 @@ function Sidebar() {
   const [sidebarActiveItem, setSidebarActiveItem] = useRecoilState(sidebarItemAtom);
 
   return (
-    <div className="sidebarDiv">
+    <div className="flex md:flex-col space-x-4 md:space-x-0 ">
       <div className="w-14 h-auto flex flex-col mb-3">
         <div
-          className="rounded p-2"
+          className="rounded p-2 flex justify-center"
           style={{ backgroundColor: sidebarActiveItem === "mySpaces" ? "#ff9900" : "white" }}
           onClick={() => setSidebarActiveItem("mySpaces")}
         >
           <CloudIcon
-            className="h-6 w-6"
+            className="h-8 w-8"
             style={{ color: sidebarActiveItem === "mySpaces" ? "white" : "black" }}
           />
         </div>
@@ -24,12 +24,12 @@ function Sidebar() {
       </div>
       <div className="w-14 h-auto flex flex-col mb-3">
         <div
-          className="rounded p-2"
+          className="rounded p-2 flex justify-center"
           style={{ backgroundColor: sidebarActiveItem === "upload" ? "#ff9900" : "white" }}
           onClick={() => setSidebarActiveItem("upload")}
         >
           <CloudUploadIcon
-            className="h-6 w-6"
+            className="h-8 w-8"
             style={{ color: sidebarActiveItem === "upload" ? "white" : "black" }}
           />
         </div>
@@ -37,12 +37,12 @@ function Sidebar() {
       </div>
       <div className="w-14 h-auto flex flex-col">
         <div
-          className="rounded p-2"
+          className="rounded p-2 flex justify-center"
           style={{ backgroundColor: sidebarActiveItem === "builder" ? "#ff9900" : "white" }}
           onClick={() => setSidebarActiveItem("builder")}
         >
           <PencilAltIcon
-            className="h-6 w-6"
+            className="h-8 w-8"
             style={{ color: sidebarActiveItem === "builder" ? "white" : "black" }}
           />
         </div>
