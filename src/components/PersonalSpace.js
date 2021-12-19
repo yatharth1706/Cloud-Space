@@ -92,10 +92,13 @@ function PersonalSpace() {
         </div>
       ) : (
         !isFetchingRecords && (
-          <div className="w-full h-full flex justify-center items-center">
+          <div className="w-full h-full flex flex-col justify-center items-center">
             <div className="space-image-container p-30 w-96 h-96 ">
               <img src={SpaceRepresentation} alt="Space" className="w-full h-full" />
             </div>
+            {/* <p className="mt-4" style = {{max}}>
+              Personalized space to store images with fast upload. You can share it as well
+            </p> */}
           </div>
         )
       )}

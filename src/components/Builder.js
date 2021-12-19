@@ -13,7 +13,7 @@ function Builder() {
 
   return (
     <div className="w-full h-full px-4 py-8 flex flex-col md:flex-row justify-center">
-      <div className="flex flex-col w-full md:w-2/6 h-full px-6">
+      <div className="flex flex-col w-full md:w-2/6 h-full md:px-6">
         <div className="flex flex-col">
           <label className="flex justify-start">Title</label>
           <input
@@ -56,7 +56,7 @@ function Builder() {
           </select>
         </div>
       </div>
-      <div className=" w-full md:w-4/6 h-full px-6 mt-6 md:mt-0">
+      <div className=" w-full md:w-4/6 h-full md:px-6 mt-6 md:mt-0">
         <span className="flex justify-start mb-2">
           Preview{" "}
           <i
