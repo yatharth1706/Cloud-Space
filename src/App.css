@@ -32,6 +32,11 @@ svg path {
   color: #61dafb;
 }
 
+.bannerDiv {
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
