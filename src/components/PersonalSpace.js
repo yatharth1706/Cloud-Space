@@ -65,7 +65,7 @@ function PersonalSpace() {
   }, [userUploads]);
 
   return (
-    <div className="bg-white py-2  w-full h-full px-4 sm:px-6 md:px-20 py-0 mt-6">
+    <div className="bg-white py-2 w-full px-4 sm:px-6 md:px-20 py-0 mt-6">
       {isFetchingRecords && (
         <ReactLoading
           className="text-center mx-auto"
@@ -92,8 +92,10 @@ function PersonalSpace() {
         </div>
       ) : (
         !isFetchingRecords && (
-          <div className="space-image-container p-30 w-full h-full flex justify-center items-center">
-            <img src={SpaceRepresentation} alt="Space" className="w-full h-full" />
+          <div className="w-full h-full flex justify-center items-center">
+            <div className="space-image-container p-30 w-96 h-96 ">
+              <img src={SpaceRepresentation} alt="Space" className="w-full h-full" />
+            </div>
           </div>
         )
       )}
