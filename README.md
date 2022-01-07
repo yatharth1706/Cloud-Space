@@ -1,12 +1,5 @@
 # Cloud Space
 
--- Remaining stuff in this:
-
-- [] Add recoil for managing sidebar and main component state
-- [] Add main component for library and file upload
-- [] Make a builder component and test it
-- [] Then push final changes and deploy to production website
-
 [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/yatharth1706)
 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/yatharth1706) [![Made With Love](https://img.shields.io/badge/Made%20With-Love-orange.svg)](https://github.com/yatharth1706)
 
